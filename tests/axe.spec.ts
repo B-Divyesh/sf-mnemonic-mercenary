@@ -1,8 +1,8 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
-test('home, demo, privacy, and settings have no serious accessibility violations', async ({ page }) => {
-  for (const route of ['/', '/demo', '/privacy']) {
+test('public routes and settings have no serious accessibility violations', async ({ page }) => {
+  for (const route of ['/', '/demo', '/privacy', '/terms', '/rules', '/license', '/404.html']) {
     await page.goto(route);
     const results = await new AxeBuilder({ page: page as never }).withTags(['wcag2a', 'wcag2aa']).analyze();
     const serious = results.violations.filter((violation) => ['serious', 'critical'].includes(violation.impact ?? ''));

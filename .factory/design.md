@@ -54,6 +54,10 @@ No stock assets, third-party fonts, remote scripts, generated imagery, or
 external audio are used. The footer discloses that the symbols are original
 code-drawn work.
 
+The repair-2 visual review inspected the 1200×630 social card at full size. Its
+symbols, text, grid, and palette remain artifact-free and on-thesis, so no
+generated replacement was needed.
+
 ## Difficulty curve
 
 The run is six deterministic fights per seed. Route lengths are 3, 3, 4, 5, 6,

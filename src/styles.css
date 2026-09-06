@@ -81,6 +81,10 @@ a:hover { color: var(--ink); }
 
 .skip-link {
   position: fixed;
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
   z-index: 10;
   top: 0.65rem;
   left: 0.65rem;
@@ -107,6 +111,13 @@ a:hover { color: var(--ink); }
 .wordmark span { color: var(--gold); }
 .site-header nav, .site-footer nav { display: flex; flex-wrap: wrap; gap: 0.8rem 1.1rem; }
 .site-header nav a { font-size: 0.92rem; }
+.site-header a, .site-footer a, .game-tools a, .offer > a, .content-page a {
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 0.2rem;
+}
 
 .first-screen { padding: clamp(1.8rem, 4vw, 4rem) 0 1.75rem; }
 .intro-copy { max-width: 760px; }

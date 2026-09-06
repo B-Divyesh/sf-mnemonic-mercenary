@@ -1,0 +1,16 @@
+{
+  "slug": "mnemonic-mercenary",
+  "name": "Mnemonic Mercenary complete game",
+  "price_minor": 499,
+  "currency": "USD",
+  "price_type": "one_time_price",
+  "return_url": "https://mnemonic-mercenary.sociobot.in/license",
+  "price_evidence": "The live /license route and README publish US$4.99 one time; the researched brief requires one-time monetization.",
+  "paid_features": [
+    "Complete six-fight expedition",
+    "Route variations",
+    "Relics",
+    "Accessibility settings"
+  ],
+  "license_validation_path": "/license"
+}

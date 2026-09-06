@@ -9,8 +9,9 @@
   `demo:mnemonic-mercenary:settings`. Real play uses
   `mnemonic-mercenary:run` and `mnemonic-mercenary:settings`. Demo code never
   reads or writes the real names.
-- **Reset:** Reset demo restores the fight-3 snapshot. Starting for real leaves
-  the demo namespace and opens the real local run.
+- **Reset:** Reset demo restores the fight-3 snapshot. Starting for real removes
+  both demo storage keys, preserves real-run data, and opens the real local run.
 
-The browser tests enter only `/demo` for the claims and assert the real run
-storage value remains unchanged.
+The browser claims start from the first-screen sample action or `/demo`. They
+assert realistic sample output, the persistent label, cleanup, and unchanged
+real-run storage.

@@ -43,6 +43,7 @@ const realRunKey = 'mnemonic-mercenary:run';
 const realSettingsKey = 'mnemonic-mercenary:settings';
 const demoRunKey = 'demo:mnemonic-mercenary:run';
 const demoSettingsKey = 'demo:mnemonic-mercenary:settings';
+const productVersion = '1.0.1';
 const demoSeed = 'field-204';
 const relics = ['Brass compass', 'Threaded lantern', 'Inkstone shield', 'Sable map'];
 const routeNames: Record<string, { title: string; description: string }> = {
@@ -121,33 +122,51 @@ function loadJson<T>(key: string, fallback: T): T {
   }
 }
 
-function normalizeRun(value: RunState, fallback: RunState): RunState {
+function normalizeRun(value: unknown, fallback: RunState): RunState {
+  const phases: Phase[] = ['memorize', 'recall', 'result', 'won', 'lost'];
   if (
+    value === null ||
     typeof value !== 'object' ||
-    typeof value.seed !== 'string' ||
-    !Number.isInteger(value.fightIndex) ||
-    value.fightIndex < 0 ||
-    value.fightIndex > 5 ||
-    !Number.isInteger(value.hp) ||
-    value.hp < 0 ||
-    value.hp > 6 ||
-    !Array.isArray(value.selected)
+    typeof (value as RunState).seed !== 'string' ||
+    !Number.isInteger((value as RunState).fightIndex) ||
+    (value as RunState).fightIndex < 0 ||
+    (value as RunState).fightIndex > 5 ||
+    !Number.isInteger((value as RunState).hp) ||
+    (value as RunState).hp < 0 ||
+    (value as RunState).hp > 6 ||
+    !Number.isInteger((value as RunState).completed) ||
+    (value as RunState).completed < 0 ||
+    (value as RunState).completed > 6 ||
+    !phases.includes((value as RunState).phase) ||
+    typeof (value as RunState).routeVisible !== 'boolean' ||
+    !Array.isArray((value as RunState).selected)
   ) {
     return fallback;
   }
-  return { ...fallback, ...value, selected: value.selected.filter((item): item is SymbolId => symbols.some((symbol) => symbol.id === item)) };
+  const run = value as RunState;
+  return { ...fallback, ...run, selected: run.selected.filter((item): item is SymbolId => symbols.some((symbol) => symbol.id === item)) };
+}
+
+function normalizeSettings(value: unknown): Settings {
+  const defaults = defaultSettings();
+  if (value === null || typeof value !== 'object') return defaults;
+  const settings = value as Partial<Settings>;
+  return {
+    nonTimed: typeof settings.nonTimed === 'boolean' ? settings.nonTimed : defaults.nonTimed,
+    impactMotion: typeof settings.impactMotion === 'boolean' ? settings.impactMotion : defaults.impactMotion
+  };
 }
 
 function loadState(demo: boolean): AppState {
   const keys = storageFor(demo);
   const fallback = demo ? makeDemoSnapshot() : makeRun();
-  const loadedRun = loadJson(keys.run, fallback);
-  const loadedSettings = loadJson(keys.settings, defaultSettings());
+  const loadedRun = loadJson<unknown>(keys.run, fallback);
+  const loadedSettings = loadJson<unknown>(keys.settings, defaultSettings());
   return {
     route: demo ? '/demo' : normalizePath(location.pathname),
     demo,
     run: normalizeRun(loadedRun, fallback),
-    settings: { ...defaultSettings(), ...loadedSettings },
+    settings: normalizeSettings(loadedSettings),
     settingsOpen: false,
     announcement: demo ? 'Demo loaded. This sample never changes your real run.' : 'A new run is ready.'
   };
@@ -157,6 +176,11 @@ function persist(): void {
   const keys = storageFor(app.demo);
   localStorage.setItem(keys.run, JSON.stringify(app.run));
   localStorage.setItem(keys.settings, JSON.stringify(app.settings));
+}
+
+function discardDemoData(): void {
+  localStorage.removeItem(demoRunKey);
+  localStorage.removeItem(demoSettingsKey);
 }
 
 function normalizePath(path: string): string {
@@ -196,7 +220,7 @@ function renderFooter(): string {
   return `<footer class="site-footer">
     <p>Six short fights where memory chooses your move.</p>
     <nav aria-label="Footer navigation"><a href="/privacy" data-link>Privacy</a><a href="/terms" data-link>Terms</a><a href="/license" data-link>Offer status</a></nav>
-    <p>Built by Param Factory · build 1.0.0 · Original code-drawn symbols.</p>
+    <p>Built by Param Factory · build ${productVersion} · Original code-drawn symbols.</p>
   </footer>`;
 }
 
@@ -336,6 +360,7 @@ function render(): void {
         app.run.phase = 'recall';
         app.run.routeVisible = false;
         app.announcement = 'The route is hidden. Choose a move.';
+        focusAfterRender('[data-symbol="sun"]');
         persist();
         render();
       }
@@ -356,7 +381,7 @@ function startRun(demo = app.demo, snapshot = false): void {
   app.demo = demo;
   app.route = demo ? '/demo' : '/';
   app.run = demo && snapshot ? { ...makeDemoSnapshot(), selected: [] } : makeRun(demo ? demoSeed : makeSeed());
-  app.settings = demo ? loadJson(demoSettingsKey, defaultSettings()) : loadJson(realSettingsKey, defaultSettings());
+  app.settings = normalizeSettings(demo ? loadJson<unknown>(demoSettingsKey, defaultSettings()) : loadJson<unknown>(realSettingsKey, defaultSettings()));
   app.announcement = demo && snapshot ? 'Demo reset to its saved fight.' : 'New run started at fight 1.';
   focusAfterRender('[data-action="hide-route"]');
   persist();
@@ -385,7 +410,7 @@ function commitMove(): void {
   run.selected = [];
   run.phase = run.hp === 0 ? 'lost' : 'result';
   app.announcement = full ? 'Strike lands.' : prefix ? 'Guard holds.' : 'The route breaks. You take 2 damage.';
-  focusAfterRender('[data-action="next-fight"]');
+  focusAfterRender(run.phase === 'lost' ? '.end-screen [data-action="restart-run"]' : '[data-action="next-fight"]');
   persist();
   render();
 }
@@ -411,6 +436,7 @@ function navigate(path: string, push = true): void {
   clearHideTimer();
   const next = normalizePath(path);
   const nextDemo = next === '/demo';
+  if (app.demo && !nextDemo) discardDemoData();
   if (nextDemo !== app.demo) {
     app = loadState(nextDemo);
   }
@@ -473,6 +499,7 @@ function bindEvents(): void {
     if (!setting) return;
     app.settings[setting] = input.checked;
     app.announcement = input.checked ? 'Setting enabled.' : 'Setting disabled.';
+    focusAfterRender(`[data-setting="${setting}"]`);
     persist();
     render();
   });
