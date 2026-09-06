@@ -8,6 +8,7 @@ https://mnemonic-mercenary.sociobot.in.
 
 - Failed baseline: `19cb360f89a3350c3fe1f9078fa6741ea33eee64`
 - Deployed implementation: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
+- Verification report commit: `612be866f8ba68caaa47e764ef96c590863602f2`
 - Detailed verification: `.factory/verification-2.md`
 
 ## What changed
