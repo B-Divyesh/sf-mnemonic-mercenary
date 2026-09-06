@@ -1,109 +1,66 @@
-# Handoff — Mnemonic Mercenary
+# Handoff — Mnemonic Mercenary repair 2
 
-## Independent verification 1 — 2026-09-06
+## Result
 
-**Verdict: FAIL.** The implementation candidate remains
-`f03f3527f93bbb11e3e554f463e01cfe468e27e3`; the reviewed documentation
-baseline is `5763d8e5ba9519595b4406cfd3eab73ac2327d7a`.
+Repair 2 passes. All five independent-verification findings are closed, all 15
+declared claims pass, and the final product is deployed at
+https://mnemonic-mercenary.sociobot.in.
 
-All ten declared claim commands passed on desktop and phone, the full suite
-passed 28 tests, the build passed, and the live assets match the candidate.
-Independent live checks nevertheless found five grouped issues:
+- Failed baseline: `19cb360f89a3350c3fe1f9078fa6741ea33eee64`
+- Deployed implementation: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
+- Detailed verification: `.factory/verification-2.md`
 
-1. Demo state remains in its local-storage namespace after **Start for real**,
-   contrary to the privacy page’s discard statement.
-2. Focus falls to `body` on the loss screen, after settings changes, and when
-   the default timer replaces a focused route control.
-3. Header, content, and footer links on a 390 px phone have 19–24 px target
-   heights instead of the required 44 px.
-4. The HTTP 404 is correctly deliberate and designed, but its page omits the
-   shared skip link, navigation, and complete footer, and its `h1` is not plain.
-5. Public claims are missing exact tagged tests. The README’s 6–10 minute
-   duration remains untested.
+## What changed
 
-The full evidence, claim table, prior-finding disposition, and reproduction
-steps are in `.factory/verification-1.md`. Required repairs remain product-code
-work and were not made because this verification order forbids product-code
-changes.
+- Starting for real now deletes both demo storage entries without changing real
+  run data.
+- Timed route hiding, settings changes, and the loss screen now place focus on
+  the next usable control.
+- Header, content, offer, and footer links now provide at least 44×44 CSS px
+  targets on a 390 px phone. The wordmark wraps at 200% text size.
+- The real HTTP 404 keeps its status and now has the common skip link, header
+  navigation, plain h1, complete footer, metadata, and product styling.
+- The unmeasured 6–10 minute statement was removed. Five missing claim areas
+  received tagged, outcome-based coverage, and the paid-offer check now
+  exercises route variation, relics, and accessibility settings.
+- Invalid saved state now recovers safely to a playable first fight.
+- The existing hand-authored art was visually reviewed and preserved; no new
+  image generation was needed.
 
-## Release
+## How to verify
 
-- Live URL: https://mnemonic-mercenary.sociobot.in
-- Artifact: static Vite + TypeScript browser game
-- Implementation SHA deployed: `f03f3527f93bbb11e3e554f463e01cfe468e27e3`
-- This handoff is a later documentation record; see the final Git commit after
-  that implementation SHA for its documentation SHA.
+```sh
+npm ci
+npm test
+npm run build
+```
 
-## What was built
+Run each command in `.factory/claims.json` independently. For a local smoke
+check, start the documented preview and run `npm run verify`. Set
+`PLAYWRIGHT_BASE_URL=https://mnemonic-mercenary.sociobot.in` to run the browser
+suite against live without starting a local server.
 
-- A deterministic six-fight, touch-friendly tactical memory run. Each seed
-  rotates enemy tells, chooses a relic, and uses routes of 3, 3, 4, 5, 6, and
-  7 symbols.
-- Full recall gives Strike. A correct route prefix gives safe Guard. A wrong
-  recall costs two health, making a real loss screen possible. The run ends in
-  a win or loss screen with a restart action.
-- The game is visible on the first screen. It supports mouse, touch, Tab,
-  Enter, and Space; route tiles have a name, shape, and verbal cue in addition
-  to color. Non-timed mode and impact-motion settings persist locally.
-- `/demo` and `?demo=1` open an isolated, populated fight-3 sample. The
-  persistent banner has Reset demo and Start for real controls. Demo uses only
-  `demo:mnemonic-mercenary:*` storage keys and never changes real-run keys.
-- `/privacy`, `/terms`, `/rules`, and `/license` are real history-aware pages.
-  Unknown paths return the designed `404.html` with an HTTP 404.
-- Original code-drawn symbol assets, favicon, touch icon, and social card are
-  included. The product uses no remote fonts, scripts, telemetry, ads, or
-  account service.
+Final results: 48/48 browser tests passed locally and live. All 15 exact claim
+commands passed on desktop and phone. The build produced 7.20 KB gzip
+JavaScript and 3.18 KB gzip CSS. Live Lighthouse scored 100 in every category,
+with 0.8 s LCP and zero layout shift. The throttled phone check measured 60.1
+frames per second.
 
-## Offer and billing status
+## Offer and privacy
 
-The public complete-game offer is **US$4.99 one time**, with no subscription.
-Its deliverable is the six-fight expedition, route variations, relics, and
-accessibility settings. Public, credential-free offer metadata is at
-`/work/.evidence/billing-offer.json`; the catalog description is copied to
-`/work/.evidence/catalog-description.txt`.
+The complete offer remains **US$4.99 one time**, never a subscription. Public
+metadata is in `.factory/billing-offer.json` and
+`/work/.evidence/billing-offer.json`. Billing registration remains an external
+dependency, so checkout and license validation are accurately unavailable.
+No credential was added or recorded.
 
-**Known external dependency:** the separate billing-registration operator has
-not registered this offer. Consequently, this build deliberately has no
-checkout redirect, entitlement assertion, or license validation claim. The
-public `/license` page says this plainly. No provider credentials were added.
+Runs and settings remain local. Demo data uses only its prefixed namespace and
+is removed by **Start for real**. There is no analytics, account, multiplayer,
+backend, or offline claim.
 
-## Verification
+## Known gaps and next step
 
-From the documented Node 20+ setup:
-
-- `npm install` — completed with no reported vulnerabilities.
-- `npm test` — **28 passed**: complete run, restart, settings persistence,
-  partial/full/wrong recall paths, demo isolation, local-only request check,
-  keyboard focus, mobile controls, route titles, legal pages, 404 asset, and
-  axe checks on desktop and a 390px phone profile.
-- Every exact command listed in `.factory/claims.json` was run separately after
-  the final implementation. All ten passed on both profiles.
-- `npm run build` — passed; `dist/` created. Final initial assets: JavaScript
-  7.04 KB gzip and CSS 3.12 KB gzip.
-- `npm run verify` — passed title/lang/main/h1/alt/console smoke check.
-- Axe is included in the browser suite; no serious or critical violations on
-  home, demo, privacy, or open settings.
-- Lighthouse 13.4.1 on local `/demo`: Performance **100**, Accessibility
-  **100**.
-- A scripted 390px phone run measured **60.6 fps** over one second and reached
-  the win end screen. The live end-board evidence is
-  `/work/.evidence/mnemonic-mercenary-live-end-board.png`.
-- Fresh live desktop and phone contexts loaded over HTTPS. The live checks
-  confirmed the first-screen title, demo banner, reset isolation, keyboard
-  focus to the symbol control and end-screen restart, six-fight win screen,
-  and zero console errors. `/privacy`, `/terms`, and `/demo` returned 200;
-  an unknown route returned the designed page with HTTP 404.
-
-## Review history and remaining work
-
-The admitted checkout was only the factory scaffold. It had no earlier product
-implementation, verification report, or review findings. During this work an
-unknown route initially returned the SPA with HTTP 200; this was fixed by
-rewriting only declared SPA paths and was rechecked live.
-
-There is intentionally no multiplayer mode, backend, account progression,
-offline claim, or analytics. There is no event telemetry for the brief’s
-completion-rate success measure because the product is privacy-first and
-local-only. If that measure is needed later, it requires a separate,
-privacy-reviewed opt-in measurement decision. Billing registration is the only
-current named dependency for the paid offer.
+There is no product-code gap from verification 1. The only external next step
+is for the authorised billing-registration operator to register the existing
+one-time offer. Product QA must recheck checkout and entitlement before either
+is advertised as available.

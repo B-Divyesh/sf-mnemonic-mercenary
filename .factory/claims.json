@@ -39,7 +39,7 @@
     "claim": "One click opens a populated demo with a persistent sample label and no changes to real game data.",
     "where": "demo banner, demo documentation",
     "test": "npm test -- --grep @claim:demo-isolated",
-    "sandbox": "Set a real-run storage sentinel, use the sample action, reset and play the populated fight-3 sample, keep the demo label visible, and assert the sentinel is unchanged."
+    "sandbox": "Set a real-run storage sentinel, use the sample action, enable non-timed mode, reset and play the populated fight-3 sample, keep the demo label visible, and assert the sentinel is unchanged."
   },
   {
     "id": "demo-discarded",

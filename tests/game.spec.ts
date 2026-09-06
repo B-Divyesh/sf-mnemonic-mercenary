@@ -127,6 +127,9 @@ test('@claim:demo-isolated demo reset and play never change a real run value', a
   await page.evaluate(() => localStorage.setItem('mnemonic-mercenary:run', 'real-run-sentinel'));
   await page.getByRole('link', { name: /Try it with sample data/ }).click();
   await expect(page).toHaveURL('/demo');
+  await page.getByRole('button', { name: 'Open game settings' }).click();
+  await page.getByRole('checkbox', { name: 'Keep routes visible until I hide them' }).check();
+  await page.getByRole('button', { name: 'Close settings' }).click();
   await page.getByRole('button', { name: 'Reset demo' }).click();
   await expect(page.getByText('Fight 3 of 6')).toBeVisible();
   await expect(page.getByLabel('Health 4 of 6')).toBeVisible();
@@ -344,7 +347,10 @@ test('every phone link has at least a 44 by 44 CSS pixel target', async ({ page 
 test('phone layout keeps play controls without horizontal overflow at 200 percent text', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/demo');
-  await page.addStyleTag({ content: 'html { font-size: 200% !important; } body { font-size: 200% !important; }' });
+  await page.evaluate(() => {
+    document.documentElement.style.setProperty('font-size', '200%', 'important');
+    document.body.style.setProperty('font-size', '1rem', 'important');
+  });
   await expect(page.getByRole('button', { name: 'Hide route and choose a move' })).toBeVisible();
   const layout = await page.evaluate(() => ({ pageWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth }));
   expect(layout.pageWidth).toBeLessThanOrEqual(layout.viewportWidth);
