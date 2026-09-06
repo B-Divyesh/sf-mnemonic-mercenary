@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mnemonic-mercenary.sociobot.in/sitemap.xml

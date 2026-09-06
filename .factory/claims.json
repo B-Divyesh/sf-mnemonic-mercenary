@@ -1,0 +1,72 @@
+[
+  {
+    "id": "six-fight-end",
+    "claim": "A six-fight run reaches a real end screen.",
+    "where": "game end screen, README",
+    "test": "npm test -- --grep @claim:six-fight-end",
+    "sandbox": "Enter /demo, use a correct safe prefix through each remaining fight, and observe the completed six-fight end screen."
+  },
+  {
+    "id": "restart-reset",
+    "claim": "Restarting a run resets it to fight 1 with full health.",
+    "where": "game end screen, README",
+    "test": "npm test -- --grep @claim:restart-reset",
+    "sandbox": "Enter /demo, restart the sample run, and inspect the first fight and health display."
+  },
+  {
+    "id": "settings-persist",
+    "claim": "Game settings persist in the current browser.",
+    "where": "game settings, README",
+    "test": "npm test -- --grep @claim:settings-persist",
+    "sandbox": "Enter /demo, enable non-timed mode, reload, and inspect the saved setting."
+  },
+  {
+    "id": "local-only-data",
+    "claim": "Runs and settings stay on this device.",
+    "where": "first-screen facts, privacy page, README",
+    "test": "npm test -- --grep @claim:local-only-data",
+    "sandbox": "Record requests through a demo interaction and assert that every request is same-origin; verify demo actions leave a real-run localStorage value unchanged."
+  },
+  {
+    "id": "safe-partial-recall",
+    "claim": "A correct partial route is a safe combat move.",
+    "where": "game controls, rules, README",
+    "test": "npm test -- --grep @claim:safe-partial-recall",
+    "sandbox": "Enter /demo, choose the visible route's first symbol, commit, and observe the Guard outcome with unchanged health."
+  },
+  {
+    "id": "demo-isolated",
+    "claim": "Demo sample data is not saved to real game data.",
+    "where": "demo banner, demo documentation",
+    "test": "npm test -- --grep @claim:demo-isolated",
+    "sandbox": "Set a real-run storage sentinel, enter /demo, reset and play the sample, and assert the sentinel is unchanged."
+  },
+  {
+    "id": "route-curve",
+    "claim": "A run uses six routes that grow from 3 to 7 symbols.",
+    "where": "How to play, README, design record",
+    "test": "npm test -- --grep @claim:route-curve",
+    "sandbox": "Enter /demo, restart a full run, clear each fight with a safe prefix, and observe the displayed route lengths 3, 3, 4, 5, 6, and 7."
+  },
+  {
+    "id": "full-recall-strike",
+    "claim": "Recalling the whole route uses Strike.",
+    "where": "game controls, rules, README",
+    "test": "npm test -- --grep @claim:full-recall-strike",
+    "sandbox": "Enter /demo, select every visible route symbol in order, and observe the Strike outcome."
+  },
+  {
+    "id": "wrong-recall-cost",
+    "claim": "A wrong route costs 2 health.",
+    "where": "rules, README",
+    "test": "npm test -- --grep @claim:wrong-recall-cost",
+    "sandbox": "Enter /demo, submit a first symbol different from the visible route, and observe health fall from 4 to 2."
+  },
+  {
+    "id": "complete-price",
+    "claim": "The complete game offer is US$4.99 one time and has no active checkout or license activation.",
+    "where": "complete game offer, terms, license status, README",
+    "test": "npm test -- --grep @claim:complete-price",
+    "sandbox": "Enter /demo, open the public offer-status route, and observe the exact price plus the unavailable checkout and validation status."
+  }
+]

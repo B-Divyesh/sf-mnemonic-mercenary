@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mnemonic Mercenary symbol route</title>
+  <desc id="desc">Five original symbol tiles form a tactical route.</desc>
+  <rect width="1200" height="630" fill="#15151c"/>
+  <path d="M0 70H1200M0 140H1200M0 210H1200M0 280H1200M0 350H1200M0 420H1200M0 490H1200M0 560H1200" stroke="#292734" stroke-width="2"/>
+  <path d="M100 0V630M200 0V630M300 0V630M400 0V630M500 0V630M600 0V630M700 0V630M800 0V630M900 0V630M1000 0V630M1100 0V630" stroke="#292734" stroke-width="2"/>
+  <circle cx="950" cy="155" r="125" fill="#f1bf62" opacity=".16"/>
+  <g fill="#211f2b" stroke="#f1bf62" stroke-width="6">
+    <rect x="110" y="285" width="150" height="150"/><rect x="305" y="285" width="150" height="150"/><rect x="500" y="285" width="150" height="150"/><rect x="695" y="285" width="150" height="150"/><rect x="890" y="285" width="150" height="150"/>
+  </g>
+  <g fill="#f1bf62" font-family="Georgia,serif" font-size="88" text-anchor="middle"><text x="185" y="390">☼</text><text x="380" y="390">≈</text><text x="575" y="390">▲</text><text x="770" y="390">■</text><text x="965" y="390">✦</text></g>
+  <text x="110" y="155" fill="#f8f1df" font-family="Georgia,serif" font-size="66">Mnemonic Mercenary</text>
+  <text x="112" y="220" fill="#c4bda9" font-family="system-ui,sans-serif" font-size="30">Remember symbol routes to choose combat moves.</text>
+</svg>

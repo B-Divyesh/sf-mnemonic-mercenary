@@ -1,0 +1,22 @@
+{
+  "name": "mnemonic-mercenary",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "playwright test",
+    "test:unit": "playwright test tests/game.spec.ts",
+    "test:axe": "playwright test tests/axe.spec.ts",
+    "verify": "bash scripts/verify-url.sh http://127.0.0.1:4173"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@types/node": "^24.5.2",
+    "@playwright/test": "1.58.2",
+    "typescript": "^5.8.3",
+    "vite": "^7.1.7"
+  }
+}
