@@ -1,5 +1,31 @@
 # Handoff — Mnemonic Mercenary
 
+## Independent verification 1 — 2026-09-06
+
+**Verdict: FAIL.** The implementation candidate remains
+`f03f3527f93bbb11e3e554f463e01cfe468e27e3`; the reviewed documentation
+baseline is `5763d8e5ba9519595b4406cfd3eab73ac2327d7a`.
+
+All ten declared claim commands passed on desktop and phone, the full suite
+passed 28 tests, the build passed, and the live assets match the candidate.
+Independent live checks nevertheless found five grouped issues:
+
+1. Demo state remains in its local-storage namespace after **Start for real**,
+   contrary to the privacy page’s discard statement.
+2. Focus falls to `body` on the loss screen, after settings changes, and when
+   the default timer replaces a focused route control.
+3. Header, content, and footer links on a 390 px phone have 19–24 px target
+   heights instead of the required 44 px.
+4. The HTTP 404 is correctly deliberate and designed, but its page omits the
+   shared skip link, navigation, and complete footer, and its `h1` is not plain.
+5. Public claims are missing exact tagged tests. The README’s 6–10 minute
+   duration remains untested.
+
+The full evidence, claim table, prior-finding disposition, and reproduction
+steps are in `.factory/verification-1.md`. Required repairs remain product-code
+work and were not made because this verification order forbids product-code
+changes.
+
 ## Release
 
 - Live URL: https://mnemonic-mercenary.sociobot.in
