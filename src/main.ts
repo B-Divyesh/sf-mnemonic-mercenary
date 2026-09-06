@@ -74,6 +74,7 @@ const routeNames: Record<string, { title: string; description: string }> = {
 
 let hideTimer: number | undefined;
 let app: AppState;
+let pendingFocus: string | undefined;
 
 function defaultSettings(): Settings {
   return { nonTimed: false, impactMotion: true };
@@ -324,6 +325,11 @@ function render(): void {
   const root = document.querySelector<HTMLDivElement>('#app');
   if (!root) return;
   root.innerHTML = isGameRoute() ? renderGamePage() : renderInfoPage();
+  if (pendingFocus) {
+    const selector = pendingFocus;
+    pendingFocus = undefined;
+    requestAnimationFrame(() => document.querySelector<HTMLElement>(selector)?.focus());
+  }
   if (isGameRoute() && app.run.phase === 'memorize' && !app.settings.nonTimed) {
     hideTimer = window.setTimeout(() => {
       if (app.run.phase === 'memorize') {
@@ -337,6 +343,10 @@ function render(): void {
   }
 }
 
+function focusAfterRender(selector: string): void {
+  pendingFocus = selector;
+}
+
 function clearHideTimer(): void {
   if (hideTimer !== undefined) window.clearTimeout(hideTimer);
   hideTimer = undefined;
@@ -348,6 +358,7 @@ function startRun(demo = app.demo, snapshot = false): void {
   app.run = demo && snapshot ? { ...makeDemoSnapshot(), selected: [] } : makeRun(demo ? demoSeed : makeSeed());
   app.settings = demo ? loadJson(demoSettingsKey, defaultSettings()) : loadJson(realSettingsKey, defaultSettings());
   app.announcement = demo && snapshot ? 'Demo reset to its saved fight.' : 'New run started at fight 1.';
+  focusAfterRender('[data-action="hide-route"]');
   persist();
   render();
 }
@@ -357,6 +368,7 @@ function hideRoute(): void {
   app.run.phase = 'recall';
   app.run.routeVisible = false;
   app.announcement = 'The route is hidden. Choose a move.';
+  focusAfterRender('[data-symbol="sun"]');
   persist();
   render();
 }
@@ -373,6 +385,7 @@ function commitMove(): void {
   run.selected = [];
   run.phase = run.hp === 0 ? 'lost' : 'result';
   app.announcement = full ? 'Strike lands.' : prefix ? 'Guard holds.' : 'The route breaks. You take 2 damage.';
+  focusAfterRender('[data-action="next-fight"]');
   persist();
   render();
 }
@@ -389,6 +402,7 @@ function nextFight(): void {
     app.run.lastOutcome = undefined;
     app.announcement = `Fight ${app.run.fightIndex + 1} is ready.`;
   }
+  focusAfterRender(app.run.phase === 'won' ? '[data-action="restart-run"]' : '[data-action="hide-route"]');
   persist();
   render();
 }
@@ -422,6 +436,7 @@ function bindEvents(): void {
       if (symbol && app.run.phase === 'recall') {
         app.run.selected.push(symbol);
         app.announcement = `${symbolById(symbol).label} added.`;
+        focusAfterRender(`[data-symbol="${symbol}"]`);
         persist();
         render();
       }
@@ -431,6 +446,7 @@ function bindEvents(): void {
     if (action === 'undo-symbol') {
       app.run.selected.pop();
       app.announcement = 'Removed last symbol.';
+      focusAfterRender(app.run.selected.length ? '[data-action="undo-symbol"]' : '[data-symbol="sun"]');
       persist();
       render();
     }

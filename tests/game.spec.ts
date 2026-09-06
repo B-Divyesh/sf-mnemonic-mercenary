@@ -136,6 +136,7 @@ test('keyboard play, route pages, and demo label work on the first screen', asyn
   await hide.focus();
   await page.keyboard.press('Enter');
   await expect(page.getByRole('heading', { name: 'Choose a route prefix' })).toBeVisible();
+  await expect(page.getByRole('button', { name: /Add Sun/ })).toBeFocused();
   await page.getByRole('link', { name: 'Read the rules' }).click();
   await expect(page).toHaveTitle('How to play — Mnemonic Mercenary');
   const rulesHeading = page.getByRole('heading', { level: 1, name: 'Choose a combat move from a remembered route' });
