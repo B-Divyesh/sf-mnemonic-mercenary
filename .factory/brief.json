@@ -1,0 +1,32 @@
+{
+  "slug": "mnemonic-mercenary",
+  "title": "Mnemonic Mercenary",
+  "territory": "games-creative",
+  "user": "Players who want a touch-friendly browser roguelike with a fresh run each break, where memory creates tactical tension rather than a reflex test.",
+  "evidence": [
+    {
+      "url": "https://hn.algolia.com/api/v1/items/49255420",
+      "date": "2026-08-11",
+      "quote_or_summary": "The maker describes a browser-and-mobile roguelike built around memorization strings, and an HN commenter asks about the combat/memory mechanic \u2014 a concrete 2026 exploration of browser roguelike novelty."
+    },
+    {
+      "url": "https://memodungeon.com/",
+      "date": "2026-09-01",
+      "quote_or_summary": "The fetched live game presents a character selection and a memory-limited descent ('How deep can you go before your memory fails?')."
+    }
+  ],
+  "recurrence": "A browser/mobile roguelike built around a nonstandard input constraint received active discussion, showing appetite beyond generic attack-button action games.",
+  "current_workaround": "Play word/memory apps without a game arc, or play a conventional roguelike that does not work well in a spare minute on touch.",
+  "incumbents_and_gap": "Word games train recall and roguelikes provide variation, but they rarely combine a short tactical run with an accessible, low-input memory mechanic. Existing examples can become string-typing tests.",
+  "smallest_useful_product": "A 10-minute expedition of six fights. Before each fight, a 3-7 symbol route flashes; recalling it selects a tactical stance, while a safe partial recall is always available. Each run changes enemy tells, route length curve, and one relic. Non-goals: speed typing, endless dungeon depth, ads between rooms, or account progression.",
+  "success_measure": "At least 50% of first-time players finish a run, while returning players choose the harder recall path in 30% of eligible fights.",
+  "artifact_class": "browser-game",
+  "monetization": "one-time \u2014 no energy timers or memory-training subscription; sell a complete accessible game.",
+  "constraints": "Never make color the sole symbol cue; tune for cognitive accessibility with a non-timed mode; local-only save; original icons/audio.",
+  "est_build_effort": "M",
+  "scale": "small",
+  "why_distinct": "It uses memory as a forgiving tactical choice with a real run ending, not as a naked score-chasing exercise.",
+  "confidence": 3,
+  "state": "RESEARCHED",
+  "research_run": "research-browser-games-0901-204337-3"
+}
