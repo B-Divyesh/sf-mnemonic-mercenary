@@ -38,7 +38,9 @@ test('@claim:six-fight-end a deterministic demo run reaches its completed end sc
 test('@claim:restart-reset restarting after the sample run restores fight 1 and full health', async ({ page }) => {
   await page.goto('/demo');
   await finishSampleRun(page);
-  await page.getByRole('button', { name: 'Start another run' }).click();
+  const restart = page.getByRole('button', { name: 'Start another run' });
+  await expect(restart).toBeFocused();
+  await restart.click();
   await expect(page.getByText('Fight 1 of 6')).toBeVisible();
   await expect(page.getByLabel('Health 6 of 6')).toBeVisible();
   await expect(page.getByText('Run complete')).not.toBeVisible();

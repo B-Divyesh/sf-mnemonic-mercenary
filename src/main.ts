@@ -402,7 +402,7 @@ function nextFight(): void {
     app.run.lastOutcome = undefined;
     app.announcement = `Fight ${app.run.fightIndex + 1} is ready.`;
   }
-  focusAfterRender(app.run.phase === 'won' ? '[data-action="restart-run"]' : '[data-action="hide-route"]');
+  focusAfterRender(app.run.phase === 'won' ? '.end-screen [data-action="restart-run"]' : '[data-action="hide-route"]');
   persist();
   render();
 }
