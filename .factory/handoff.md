@@ -1,67 +1,62 @@
-# Handoff — Mnemonic Mercenary repair 2
+# Handoff — Mnemonic Mercenary independent verification 2
 
 ## Result
 
-Repair 2 passes. All five independent-verification findings are closed, all 15
-declared claims pass, and the final product is deployed at
-https://mnemonic-mercenary.sociobot.in.
+**PASS — 0 findings and 0 untested claims.**
 
-- Failed baseline: `19cb360f89a3350c3fe1f9078fa6741ea33eee64`
-- Deployed implementation: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
-- Verification report commit: `612be866f8ba68caaa47e764ef96c590863602f2`
-- Detailed verification: `.factory/verification-2.md`
+Independent QA verified the deployed implementation at
+https://mnemonic-mercenary.sociobot.in without changing product code.
 
-## What changed
+- Implementation reviewed: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
+- Documentation baseline: `84a94b83c5993ca6e5777f0b25de9f8685090ea4`
+- Detailed report: `.factory/verification-2.md`
 
-- Starting for real now deletes both demo storage entries without changing real
-  run data.
-- Timed route hiding, settings changes, and the loss screen now place focus on
-  the next usable control.
-- Header, content, offer, and footer links now provide at least 44×44 CSS px
-  targets on a 390 px phone. The wordmark wraps at 200% text size.
-- The real HTTP 404 keeps its status and now has the common skip link, header
-  navigation, plain h1, complete footer, metadata, and product styling.
-- The unmeasured 6–10 minute statement was removed. Five missing claim areas
-  received tagged, outcome-based coverage, and the paid-offer check now
-  exercises route variation, relics, and accessibility settings.
-- Invalid saved state now recovers safely to a playable first fight.
-- The existing hand-authored art was visually reviewed and preserved; no new
-  image generation was needed.
+All five findings from verification 1 are fixed. The live game, 404, hashed
+JavaScript, and hashed CSS match the fresh local build byte for byte.
 
-## How to verify
+## Verified product behavior
+
+- The first phone and desktop screens state the symbol-route combat job,
+  intended player, sample action, and three facts while showing active play.
+- The one-click sample opens fight 3 with 4 / 6 health, the Brass compass, two
+  prior fights, and a persistent demo label.
+- Demo reset, disposal, and storage isolation pass without changing real data.
+- A deterministic phone run reaches the six-fight win screen.
+- Three wrong desktop moves reach the real loss screen at 0 health.
+- Win and loss restart controls receive focus and reset the run.
+- Invalid saved data recovers; real progress and settings persist after reload.
+- Touch, mouse, keyboard, focus, 200% text, reduced motion, and phone targets
+  pass.
+- Legal pages, route titles, history, internal links, privacy behavior,
+  security headers, and the designed HTTP 404 pass.
+- No offline, multiplayer, account, analytics, or backend behavior is claimed.
+
+## Commands and measurements
 
 ```sh
 npm ci
-npm test
+npm test -- --reporter=dot
 npm run build
 ```
 
-Run each command in `.factory/claims.json` independently. For a local smoke
-check, start the documented preview and run `npm run verify`. Set
-`PLAYWRIGHT_BASE_URL=https://mnemonic-mercenary.sociobot.in` to run the browser
-suite against live without starting a local server.
+Run each exact command in `.factory/claims.json` for claim-level verification.
+For live QA, set
+`PLAYWRIGHT_BASE_URL=https://mnemonic-mercenary.sociobot.in` before `npm test`.
 
-Final results: 48/48 browser tests passed locally and live. All 15 exact claim
-commands passed on desktop and phone. The build produced 7.20 KB gzip
-JavaScript and 3.18 KB gzip CSS. Live Lighthouse scored 100 in every category,
-with 0.8 s LCP and zero layout shift. The throttled phone check measured 60.1
-frames per second.
+- Local suite: 48/48 passed.
+- Live suite: 48/48 passed in isolation.
+- Exact claim commands: 15/15 passed in desktop and phone projects.
+- Build: 7.20 KB gzip JavaScript, 3.18 KB gzip CSS, 79,342 bytes total.
+- Live Lighthouse: 100 in every category; LCP 0.88 s, CLS 0, TBT 5 ms.
+- Throttled phone animation rate: 60.3 fps.
+- Dependency audit: 0 vulnerabilities.
 
-## Offer and privacy
+## Offer and next step
 
-The complete offer remains **US$4.99 one time**, never a subscription. Public
-metadata is in `.factory/billing-offer.json` and
-`/work/.evidence/billing-offer.json`. Billing registration remains an external
-dependency, so checkout and license validation are accurately unavailable.
-No credential was added or recorded.
+The researched offer remains **US$4.99 one time**, never a subscription.
+Public offer metadata is in `.factory/billing-offer.json`. Billing registration
+is the only external dependency. Checkout and activation remain unavailable
+and are not claimed as working. Product QA must verify both before that copy
+changes.
 
-Runs and settings remain local. Demo data uses only its prefixed namespace and
-is removed by **Start for real**. There is no analytics, account, multiplayer,
-backend, or offline claim.
-
-## Known gaps and next step
-
-There is no product-code gap from verification 1. The only external next step
-is for the authorised billing-registration operator to register the existing
-one-time offer. Product QA must recheck checkout and entitlement before either
-is advertised as available.
+No credentials, access tokens, or cookie values were collected or recorded.
