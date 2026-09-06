@@ -1,19 +1,22 @@
-# Handoff — Mnemonic Mercenary verification 3
+# Handoff — Mnemonic Mercenary review 3
 
 ## Result
 
 **PASS — 0 findings and 0 untested public claims.**
 
-Broader live qualification verified the released browser game without changing
-product code.
+Fresh strict review verified the released browser game without changing product
+code.
 
 - Implementation reviewed: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
-- Documentation baseline: `e6d724629cc32a0239c85dd1f1aa7ede7f515d37`
-- Detailed report: `.factory/verification-3.md`
+- Documentation baseline: `c4ec797e45262bf485a6c9d1b102a56c6487deb3`
+- Detailed report: `.factory/review-3.md`
 - Live URL: https://mnemonic-mercenary.sociobot.in
 
 ## What was verified
 
+- This review used fresh Chromium 145 desktop and 390×844 touch-phone contexts
+  for the first screen, one-click populated demo, reset, complete win, complete
+  loss, console/page-error, privacy, route, and HTTP-404 checks.
 - Chromium 145.0.7632.6, Firefox 146.0.1, and WebKit 26.0 at 1440×900 and
   390×844 touch viewports.
 - The first screen states the real play, audience, sample action, and three
@@ -29,6 +32,8 @@ product code.
 - Legal pages, route titles, history, accessibility scans, privacy requests,
   security headers, internal routes, and the designed HTTP 404 pass.
 - The live product files match a clean build byte for byte.
+- Every declared claim command was freshly run independently from the clean
+  checkout in both configured projects. All 15 passed.
 
 ## Commands
 
@@ -40,7 +45,7 @@ bash scripts/verify-url.sh https://mnemonic-mercenary.sociobot.in
 ```
 
 Run each `test` command in `.factory/claims.json` separately for claim-level
-verification. The verifier-only cross-engine configuration and captures are in
+verification. Fresh review screenshots and the required QA summary are in
 `/work/.evidence/`; no test harness files were added to the product repository.
 
 ## Measurements and boundaries
@@ -50,6 +55,7 @@ verification. The verifier-only cross-engine configuration and captures are in
 - Build: 79,342 bytes total; 7.20 KB gzip JavaScript and 3.19 KB gzip CSS.
 - Headless phone-viewport animation rate: Chromium 60.12 fps, Firefox 59.74
   fps, WebKit 59.38 fps.
+- Fresh review phone observation: Chromium 60.18 fps over two seconds.
 
 The tested Firefox phone context is Firefox with touch and a 390×844 viewport,
 not Firefox Android. The tested WebKit binary is not branded Safari or iOS.
