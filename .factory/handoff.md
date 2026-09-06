@@ -1,17 +1,17 @@
-# Handoff — Mnemonic Mercenary independent verification 2
+# Handoff — Mnemonic Mercenary review 1
 
 ## Result
 
-**PASS — 0 findings and 0 untested claims.**
+**PASS — 0 findings and 0 untested public claims.**
 
-Independent QA verified the deployed implementation at
+Fresh strict QA verified the deployed implementation at
 https://mnemonic-mercenary.sociobot.in without changing product code.
 
 - Implementation reviewed: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
-- Documentation baseline: `84a94b83c5993ca6e5777f0b25de9f8685090ea4`
-- Detailed report: `.factory/verification-2.md`
+- Documentation baseline: `04e7b2dcb95754dcf1940511762e16e6580dc3c0`
+- Detailed report: `.factory/review-1.md`
 
-All five findings from verification 1 are fixed. The live game, 404, hashed
+All five findings from verification 1 remain fixed. The live game, 404, hashed
 JavaScript, and hashed CSS match the fresh local build byte for byte.
 
 ## Verified product behavior
@@ -47,8 +47,11 @@ For live QA, set
 - Live suite: 48/48 passed in isolation.
 - Exact claim commands: 15/15 passed in desktop and phone projects.
 - Build: 7.20 KB gzip JavaScript, 3.18 KB gzip CSS, 79,342 bytes total.
-- Live Lighthouse: 100 in every category; LCP 0.88 s, CLS 0, TBT 5 ms.
-- Throttled phone animation rate: 60.3 fps.
+- Live Lighthouse JSON: 100 in every category; LCP 0.8 s, CLS 0, TBT 0 ms.
+  The local Lighthouse browser process crashed during shutdown after emitting
+  the complete JSON, so this is audit evidence rather than a successful
+  Lighthouse process exit.
+- Throttled phone animation rate: 60.12 fps.
 - Dependency audit: 0 vulnerabilities.
 
 ## Offer and next step
