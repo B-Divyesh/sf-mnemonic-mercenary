@@ -341,6 +341,15 @@ test('every phone link has at least a 44 by 44 CSS pixel target', async ({ page 
   }
 });
 
+test('phone layout keeps play controls without horizontal overflow at 200 percent text', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/demo');
+  await page.addStyleTag({ content: 'html { font-size: 200% !important; } body { font-size: 200% !important; }' });
+  await expect(page.getByRole('button', { name: 'Hide route and choose a move' })).toBeVisible();
+  const layout = await page.evaluate(() => ({ pageWidth: document.documentElement.scrollWidth, viewportWidth: innerWidth }));
+  expect(layout.pageWidth).toBeLessThanOrEqual(layout.viewportWidth);
+});
+
 test('legal pages and designed not-found page have titles and the complete shared structure', async ({ page }) => {
   await page.goto('/privacy');
   await expect(page).toHaveTitle('Privacy — Mnemonic Mercenary');

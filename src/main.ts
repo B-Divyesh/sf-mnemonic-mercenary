@@ -324,7 +324,7 @@ function renderInfoPage(): string {
   const info: Record<string, { h1: string; body: string }> = {
     '/privacy': {
       h1: 'Keep your game data on your device',
-      body: `<p>Mnemonic Mercenary stores a current run and your settings in this browser’s local storage. It sends no analytics, ads, account data, or game events to another service.</p><h2>What is stored</h2><ul><li>Current fight, health, seed, relic, and result</li><li>Non-timed and movement settings</li></ul><h2>How to remove it</h2><p>Use your browser’s site-data controls to clear this site. Demo data uses a separate local-storage name and is discarded when you leave demo mode.</p>`
+      body: `<p>Mnemonic Mercenary stores a current run and your settings in this browser’s local storage. It sends no analytics, ads, account data, or game events to another service.</p><h2>What is stored</h2><ul><li>Current fight, health, seed, relic, and result</li><li>Non-timed and movement settings</li></ul><h2>How to remove it</h2><p>Use your browser’s site-data controls to clear this site. Demo data uses separate local-storage names. Choosing “Start for real” removes both demo entries.</p>`
     },
     '/terms': {
       h1: 'Use the game for personal play',

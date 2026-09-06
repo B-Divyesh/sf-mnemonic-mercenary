@@ -58,7 +58,7 @@ a {
   border-bottom: 1px solid #514b5a;
 }
 
-.wordmark { color: #f8f1df; font-weight: 800; text-decoration: none; letter-spacing: -0.02em; }
+.wordmark { max-width: 100%; flex-wrap: wrap; color: #f8f1df; font-weight: 800; text-decoration: none; letter-spacing: -0.02em; overflow-wrap: anywhere; }
 .wordmark span { margin-right: 0.25rem; color: #f1bf62; }
 nav { display: flex; flex-wrap: wrap; gap: 0.8rem 1.1rem; }
 .site-header nav a { font-size: 0.92rem; }
