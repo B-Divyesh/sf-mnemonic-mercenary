@@ -1,15 +1,15 @@
-# Handoff — Mnemonic Mercenary review 1
+# Handoff — Mnemonic Mercenary review 2
 
 ## Result
 
 **PASS — 0 findings and 0 untested public claims.**
 
-Fresh strict QA verified the deployed implementation at
+Fresh strict QA again verified the deployed implementation at
 https://mnemonic-mercenary.sociobot.in without changing product code.
 
 - Implementation reviewed: `e53e351cc9d69634bdb5a69efc2a304c41282eb1`
-- Documentation baseline: `04e7b2dcb95754dcf1940511762e16e6580dc3c0`
-- Detailed report: `.factory/review-1.md`
+- Documentation baseline: `3e6538db6b84f5b4cf9fd7d4441066d915e37ec2`
+- Detailed report: `.factory/review-2.md`
 
 All five findings from verification 1 remain fixed. The live game, 404, hashed
 JavaScript, and hashed CSS match the fresh local build byte for byte.
@@ -21,8 +21,8 @@ JavaScript, and hashed CSS match the fresh local build byte for byte.
 - The one-click sample opens fight 3 with 4 / 6 health, the Brass compass, two
   prior fights, and a persistent demo label.
 - Demo reset, disposal, and storage isolation pass without changing real data.
-- A deterministic phone run reaches the six-fight win screen.
-- Three wrong desktop moves reach the real loss screen at 0 health.
+- A deterministic desktop run reaches the six-fight win screen.
+- Three wrong phone moves reach the real loss screen at 0 health.
 - Win and loss restart controls receive focus and reset the run.
 - Invalid saved data recovers; real progress and settings persist after reload.
 - Touch, mouse, keyboard, focus, 200% text, reduced motion, and phone targets
@@ -47,11 +47,8 @@ For live QA, set
 - Live suite: 48/48 passed in isolation.
 - Exact claim commands: 15/15 passed in desktop and phone projects.
 - Build: 7.20 KB gzip JavaScript, 3.18 KB gzip CSS, 79,342 bytes total.
-- Live Lighthouse JSON: 100 in every category; LCP 0.8 s, CLS 0, TBT 0 ms.
-  The local Lighthouse browser process crashed during shutdown after emitting
-  the complete JSON, so this is audit evidence rather than a successful
-  Lighthouse process exit.
-- Throttled phone animation rate: 60.12 fps.
+- Throttled phone animation rate: 60.45 fps (121 frames in 2,001.7 ms at 4x
+  CPU throttling).
 - Dependency audit: 0 vulnerabilities.
 
 ## Offer and next step
